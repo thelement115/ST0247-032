@@ -1,8 +1,6 @@
 /**
- * Write a description of class Reinas here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
+ * clase para solucionar el problema de las n-reinas
+ * Eduard Damiam Londoño, Gonzalo Garcia
  */
 public class Reinas
 {
