@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
- package lab1;
+  
 
 import java.util.ArrayList;
 import java.io.FileReader;
@@ -120,17 +120,21 @@ public class DigraphAlgorithms
         System.out.println("}");
      }
  // metodo para leer el grafo de medellin
- public static Graph medellin(){
-     DigraphAL grafo = new DigraphAL(Integer.MAX_VALUE);
+ public static DigraphAL medellin(){
+     DigraphAL grafo = new DigraphAL(300000);
      try{
      BufferedReader input = new BufferedReader(new FileReader("medellin_colombia-grande.txt"));
-     String read = "";
+     String read = input.readLine();
      while((read = input.readLine())!= null){
         String [] linea = read.split(" ");
+        if (linea.length ==1){
+            continue;
+        }
         int a = (int)Double.parseDouble(linea[0]);
         int b = (int)Double.parseDouble(linea[1]);
         int c = (int)Double.parseDouble(linea[2]);
         grafo.addArc(b, c, a);
+        System.out.println(b + " " + c +" " + a);
      }
      }catch(Exception e){
          System.out.println(e);
@@ -169,6 +173,6 @@ public class DigraphAlgorithms
      System.out.println(maxvecinos(dgam));
      
      DigraphAlgorithms.dibujarGrafo(dgal);
-     
+
  }
 }
