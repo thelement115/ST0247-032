@@ -26,11 +26,11 @@ public class Punto1 {
     
     private static void dfsRetornador(Digraph g, int v,ArrayList<Integer> l, boolean[] vi){
           vi[v] = true; //lista de nodos visitados
-           l.add(v);
+          l.add(v);
           ArrayList<Integer> sucesores = g.getSuccessors(v);
           if (sucesores != null)
             for(Integer sucesor: sucesores){
-              if (vi[sucesor] != false) // vi[sucesor] != false
+              if (vi[sucesor] != true) // vi[sucesor] != false
                  dfsRetornador(g,sucesor, l, vi); 
              }
             

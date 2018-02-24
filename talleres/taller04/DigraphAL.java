@@ -1,46 +1,53 @@
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.*;
 
 /**
  * Implementacion de un grafo dirigido usando listas de adyacencia
  *
- * @author Mauricio Toro, Mateo Agudelo, <su nombre>
+ * @author Mauricio Toro, Mateo Agudelo, Eduard Damiam, Gonzalo Garcia
  */
 public class DigraphAL extends Digraph {
-	// complete...
-	ArrayList<ArrayList<Pair<Integer, Integer>>> list;
-
+    public LinkedList<LinkedList<Pair<Integer, Integer>>> grafo;
+    
 	public DigraphAL(int size) {
 		super(size);
-		// complete...
-		list = new ArrayList<>(size);
-		for (int i = 0; i < size; ++i)
-			list.add(i, new ArrayList<Pair<Integer, Integer>>());
+		grafo = new LinkedList<>();
+		for (int i =0; i<size;i++){
+		  grafo.add(new LinkedList<Pair<Integer,Integer>>());
+		  }
 	}
-
+	
+	public int getSize(){
+	    return size;
+	   }
+	   
+	public LinkedList getArco(int source){
+	    LinkedList arco = grafo.get(source);
+	    return arco;
+	   }
+	   
 	public void addArc(int source, int destination, int weight) {
-		// complete...
-		// recuerde: grafo dirigido!
-		list.get(source).add(Pair.makePair(destination, weight));
-	}
+	     LinkedList arco = grafo.get(source);
+	     arco.add(new Pair(destination,weight));
+	   }
 
 	public ArrayList<Integer> getSuccessors(int vertex) {
-		// complete...
-		ArrayList<Integer> s = new ArrayList<>(list.get(vertex).size());
-		for (Pair<Integer, Integer> p : list.get(vertex))
-			s.add(p.first);
-		if (s.size() == 0)
-			return null;
-		Collections.sort(s);
-		return s;
+	   ArrayList<Integer> Successors = new ArrayList<>();
+	   int a = grafo.get(vertex).size();
+	   for (int i =0;i< a;i++){
+	       Successors.add(grafo.get(vertex).get(i).first);
+	   }
+	   return Successors;
 	}
 
 	public int getWeight(int source, int destination) {
-		// complete...
-		for (Pair<Integer, Integer> p : list.get(source))
-			if (p.first == destination)
-				return p.second;
-		return 0;
+	   LinkedList weight= grafo.get(source);
+	   for (int i =0; i < weight.size();i++){
+	     Pair a = (Pair)weight.get(i);
+	     if((int)(a.first)==destination){
+	        return (int)a.second;
+	       }
+	   }
+	   return 0;
 	}
 
 }
