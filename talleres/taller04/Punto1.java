@@ -3,7 +3,7 @@ import java.util.ArrayList;
 /**
  * Clase en la cual se implementan los metodos del Taller de Clase #4
  * 
- * @author Mauricio Toro, Mateo Agudelo
+ * @author Gonzalo Garcia & Edward Damiam
  */
 public class Punto1 {
     
