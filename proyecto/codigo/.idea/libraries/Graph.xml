@@ -2,10 +2,8 @@
   <library name="Graph">
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/Libraries/Graph.jar!/" />
-      <root url="file://$PROJECT_DIR$/Libraries/jgrapht-1.1.0/lib" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
-    <jarDirectory url="file://$PROJECT_DIR$/Libraries/jgrapht-1.1.0/lib" recursive="false" />
   </library>
 </component>

@@ -16,7 +16,7 @@
         <entry file="file://$PROJECT_DIR$/src/Lectura.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="553">
-              <caret line="189" column="16" lean-forward="true" selection-start-line="189" selection-start-column="16" selection-end-line="189" selection-end-column="16" />
+              <caret line="189" column="16" lean-forward="false" selection-start-line="189" selection-start-column="16" selection-end-line="189" selection-end-column="16" />
               <folding>
                 <element signature="method#leerPrimeraParte#0;class#Lectura#0" expanded="false" />
                 <element signature="method#leerCoordenadas#0;class#Lectura#0" expanded="false" />
@@ -29,7 +29,7 @@
         <entry file="file://$PROJECT_DIR$/src/dibujar.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="210">
-              <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+              <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -711,7 +711,7 @@
     <entry file="file://$PROJECT_DIR$/src/dibujar.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
-          <caret line="10" column="0" lean-forward="true" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <caret line="10" column="0" lean-forward="false" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -719,7 +719,7 @@
     <entry file="file://$PROJECT_DIR$/src/Lectura.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="553">
-          <caret line="189" column="16" lean-forward="true" selection-start-line="189" selection-start-column="16" selection-end-line="189" selection-end-column="16" />
+          <caret line="189" column="16" lean-forward="false" selection-start-line="189" selection-start-column="16" selection-end-line="189" selection-end-column="16" />
           <folding>
             <element signature="method#leerPrimeraParte#0;class#Lectura#0" expanded="false" />
             <element signature="method#leerCoordenadas#0;class#Lectura#0" expanded="false" />
