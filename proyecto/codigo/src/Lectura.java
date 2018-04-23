@@ -20,6 +20,7 @@ public class Lectura {
     private Double Smax;
     private Double stCustomer;
     private Double Q;
+    private Vertice deposito;
 
     public Integer getN() {
         return n;
@@ -61,6 +62,10 @@ public class Lectura {
         return Q;
     }
 
+    public Vertice getDeposito() {
+        return deposito;
+    }
+
     /**
      *
      * @param archivo
@@ -93,7 +98,7 @@ public class Lectura {
      * metodo que lee la primera parte y asigna los valores de los atributos
      */
 
-    public void leerPrimeraParte(BufferedReader input){
+    private void leerPrimeraParte(BufferedReader input){
         String entrada;
         String [] strings;
         try{
@@ -101,34 +106,34 @@ public class Lectura {
                 entrada = input.readLine();
                 strings = entrada.split(" ");
                 if (i == 1){
-                    n = Integer.parseInt(strings[3]);
+                    n = Integer.parseInt(strings[2]);
                 }
                 else if (i == 2){
-                    m = Integer.parseInt(strings[3]);
+                    m = Integer.parseInt(strings[2]);
                 }
                 else if (i == 3){
-                    u = Integer.parseInt(strings[3]);
+                    u = Integer.parseInt(strings[2]);
                 }
                 else if (i ==4){
-                    breaks = Integer.parseInt(strings[3]);
+                    breaks = Integer.parseInt(strings[2]);
                 }
                 else if (i == 5){
-                    r = Double.parseDouble(strings[3]);
+                    r = Double.parseDouble(strings[2]);
                 }
                 else if (i == 6){
-                    speed = Double.parseDouble(strings[3]);
+                    speed = Double.parseDouble(strings[2]);
                 }
                 else if (i == 7){
-                    Tmax = Double.parseDouble(strings[3]);
+                    Tmax = Double.parseDouble(strings[2]);
                 }
                 else if (i == 8){
-                    Smax = Double.parseDouble(strings[3]);
+                    Smax = Double.parseDouble(strings[2]);
                 }
                 else if (i == 9){
-                    stCustomer = Double.parseDouble(strings[3]);
+                    stCustomer = Double.parseDouble(strings[2]);
                 }
                 else if (i == 10){
-                    Q = Double.parseDouble(strings[3]);
+                    Q = Double.parseDouble(strings[2]);
                 }
             }
         }catch (IOException e){
@@ -143,20 +148,23 @@ public class Lectura {
      * @pàram
      * metodo que lee las coordenadas
      */
-    public void leerCoordenadas(BufferedReader input,ArrayList <Vertice> clientes, ArrayList <Vertice> cargas) {
+    private void leerCoordenadas(BufferedReader input,ArrayList <Vertice> clientes, ArrayList <Vertice> cargas) {
         String entrada; // string para manejar la entrada
         String[] strings; // arreglo para manejar cada palabra
         try {
             while (!(entrada = input.readLine()).equals("l")){ // se miran todas las coordenadas
-                if (!entrada.equals("")){ // si la linea esta vacia no se hace nada
+                if (entrada.equals("")){ // si la linea esta vacia no se hace nada
                     continue;
                 }else {
                     strings = entrada.split(" "); //
-                    if (strings[2].charAt(0) == 'c' || strings[2].charAt(0) == 'd'){
-                        Vertice n = new Vertice(Double.parseDouble(strings[2]),Double.parseDouble(strings[3]),strings[2]);
+                    if (strings[1].charAt(0) == 'c' ){
+                        Vertice n = new Vertice(Double.parseDouble(strings[2]),Double.parseDouble(strings[3]),strings[1]);
                         clientes.add(n);
-                    }else {
-                        Vertice n = new Vertice(Double.parseDouble(strings[2]),Double.parseDouble(strings[3]),strings[2]);
+                    }else if(strings[1].charAt(0)== 'd'){
+                        deposito = new Vertice(Double.parseDouble(strings[2]),Double.parseDouble(strings[3]),strings[1]);
+                    }
+                    else {
+                        Vertice n = new Vertice(Double.parseDouble(strings[2]),Double.parseDouble(strings[3]),strings[1]);
                         cargas.add(n);
                     }
                 }
@@ -175,7 +183,7 @@ public class Lectura {
      * metodo que crea el grafo con las cargas y los clientes
      */
 
-    public void insertarCoordenadas(ArrayList <Vertice> clientes, Graph grafo, ArrayList <Vertice> cargas){
+    private void insertarCoordenadas(ArrayList <Vertice> clientes, Graph grafo, ArrayList <Vertice> cargas){
         for (Vertice s: clientes
              ) {
             for (Vertice r:clientes
@@ -185,12 +193,16 @@ public class Lectura {
             for (Vertice r:cargas){
                 grafo.addArc(s.nombre,r.nombre,s.x,s.y,r.x,r.y);
             }
+            grafo.addArc(s.nombre,deposito.nombre,s.x,s.y,deposito.x,deposito.y);
+            grafo.addArc(deposito.nombre,s.nombre,deposito.x,deposito.y,s.x,s.y);
         }
         for (Vertice s: cargas
              ) {
-            for (Vertice r: clientes){
-                grafo.addArc(s.nombre,r.nombre,s.x,s.y,r.x,r.y);
+            for (Vertice r : clientes) {
+                grafo.addArc(s.nombre, r.nombre, s.x, s.y, r.x, r.y);
             }
+            grafo.addArc(s.nombre, deposito.nombre, s.x, s.y, deposito.x, deposito.y);
+            grafo.addArc(deposito.nombre,s.nombre,deposito.x,deposito.y,s.x,s.y);
         }
     }
 
