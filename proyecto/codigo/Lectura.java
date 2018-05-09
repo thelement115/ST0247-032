@@ -183,26 +183,23 @@ public class Lectura {
      * metodo que crea el grafo con las cargas y los clientes
      */
 
-    private void insertarCoordenadas(ArrayList <Vertice> clientes, Graph grafo, ArrayList <Vertice> cargas){
-        for (Vertice s: clientes
-             ) {
-            for (Vertice r:clientes
-                 ) {
-                grafo.addArc(s.nombre,r.nombre,s.x,s.y,r.x,r.y);
+    private void insertarCoordenadas(ArrayList <Vertice> clientes, Graph grafo, ArrayList <Vertice> cargas) {
+        for (Vertice s : clientes
+                ) {
+            for (Vertice r : clientes
+                    ) {
+                if(r != s) {
+                    grafo.addArc(s.nombre, r.nombre, s.x, s.y, r.x, r.y);
+                }
             }
-            for (Vertice r:cargas){
-                grafo.addArc(s.nombre,r.nombre,s.x,s.y,r.x,r.y);
-            }
-            grafo.addArc(s.nombre,deposito.nombre,s.x,s.y,deposito.x,deposito.y);
-            grafo.addArc(deposito.nombre,s.nombre,deposito.x,deposito.y,s.x,s.y);
-        }
-        for (Vertice s: cargas
-             ) {
-            for (Vertice r : clientes) {
+            for (Vertice r : cargas) {
                 grafo.addArc(s.nombre, r.nombre, s.x, s.y, r.x, r.y);
+                grafo.addArc(r.nombre, s.nombre, r.x, r.y, s.x, s.y);
+                grafo.addArc(s.nombre, deposito.nombre, s.x, s.y, deposito.x, deposito.y);
+                grafo.addArc(deposito.nombre, s.nombre, deposito.x, deposito.y, s.x, s.y);
             }
             grafo.addArc(s.nombre, deposito.nombre, s.x, s.y, deposito.x, deposito.y);
-            grafo.addArc(deposito.nombre,s.nombre,deposito.x,deposito.y,s.x,s.y);
+            grafo.addArc(deposito.nombre, s.nombre, deposito.x, deposito.y, s.x, s.y);
         }
     }
 
