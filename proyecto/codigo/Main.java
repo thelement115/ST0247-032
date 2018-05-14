@@ -8,11 +8,9 @@ public class Main {
     private static Integer n ;
     private static Integer m;
     private static Integer u;
-    private static Integer breaks;
     private static Double r;
     private static Double speed;
     private static Double Tmax;
-    private static Double Smax;
     private static Double stCustomer;
     private static Double Q;
     private static Vertice deposito;
@@ -20,7 +18,7 @@ public class Main {
     public static void main(String [] args){
         Graph g;
         ArrayList <Vertice> clientes = new ArrayList<>();
-        ArrayList <Vertice> cargas = new ArrayList<>();
+        ArrayList <Carga> cargas = new ArrayList<>();
         ArrayList <Vertice> solucion = new ArrayList<>();
         Lectura input = new Lectura();
         try {
@@ -28,17 +26,15 @@ public class Main {
             n = input.getN();
             m = input.getM();
             u = input.getU();
-            breaks = input.getBreaks();
             r = input.getR();
             speed= input.getSpeed();
             Tmax = input.getTmax();
-            Smax = input.getSmax();
             stCustomer = input.getStCustomer();
             Q = input.getQ();
             deposito= input.getDeposito();
             //dibujar draw = new dibujar(clientes,cargas,deposito);
             Camino mejor = new Camino();
-            solucion =mejor.conjuntoSolucion(clientes,g,deposito,Tmax,speed);
+            solucion =mejor.conjuntoSolucion(clientes,g,deposito,Tmax,speed,stCustomer,Q,r,cargas);
 //            for(int i =0; i<solucion.size(); ++i){
 //                System.out.println(solucion.get(i).nombre);
 //            }

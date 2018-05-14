@@ -13,11 +13,9 @@ public class Lectura {
     private Integer n ;
     private Integer m;
     private Integer u;
-    private Integer breaks;
     private Double r;
     private Double speed;
     private Double Tmax;
-    private Double Smax;
     private Double stCustomer;
     private Double Q;
     private Vertice deposito;
@@ -34,10 +32,6 @@ public class Lectura {
         return u;
     }
 
-    public Integer getBreaks() {
-        return breaks;
-    }
-
     public Double getR() {
         return r;
     }
@@ -48,10 +42,6 @@ public class Lectura {
 
     public Double getTmax() {
         return Tmax;
-    }
-
-    public Double getSmax() {
-        return Smax;
     }
 
     public Double getStCustomer() {
@@ -76,7 +66,7 @@ public class Lectura {
      * metodo que recibe el nombre del archivo y uns arreglo de vertices y regresa un grafo hecho con los datos del archivo
      */
 
-    public Graph leer (String archivo, ArrayList <Vertice> clientes, ArrayList <Vertice> cargas) throws IOException{
+    public Graph leer (String archivo, ArrayList <Vertice> clientes, ArrayList <Carga> cargas) throws IOException{
         input = new BufferedReader(new FileReader(archivo)); // creacion del buffered
         String entrada; // string para manejar las entradas
         Graph grafo = new Graph(); // se crea el grafo
@@ -88,8 +78,52 @@ public class Lectura {
                 break;
             }
         }
+        añadirEnergia(input,clientes,grafo,cargas);
         insertarCoordenadas(clientes,grafo, cargas);
         return grafo;
+    }
+
+    private void añadirEnergia(BufferedReader input,ArrayList <Vertice> clientes,Graph g,ArrayList <Carga> cargas){
+        String entrada;
+        String[] strings;
+        ArrayList<Double> tempCarga = new ArrayList<>();
+        ArrayList<Double> cantidCarga= new ArrayList<>();
+        try{
+            while (!(entrada=input.readLine()).equals("g")){
+                if (entrada.equals("")|| entrada.equals("l")){
+                    continue;
+                }
+                else{
+                    strings = entrada.split( " ");
+                    double tiempo = Double.parseDouble(strings[3]);
+                    tempCarga.add(tiempo);
+                }
+            }
+            while ((entrada = input.readLine())!= null){
+                if (entrada.equals("") || entrada.equals("g")){ // si la linea esta vacia no se hace nada
+                    continue;
+                }else {
+                    strings = entrada.split(" "); //Separa la linea por palabras
+                    double carga = Double.parseDouble(strings[3]);
+                    cantidCarga.add(carga);
+                }
+            }
+            for(Carga estacion : cargas){
+                if(estacion.tipo == 0){
+                    estacion.vel = (tempCarga.get(0));
+                    estacion.carga = cantidCarga.get(0);
+                }else if(estacion.tipo == 1){
+                    estacion.vel = tempCarga.get(1);
+                    estacion.carga = cantidCarga.get(1);
+                }else if(estacion.tipo == 2){
+                    estacion.vel= tempCarga.get(2);
+                    estacion.carga = cantidCarga.get(2);
+                }
+            }
+
+        }catch (Exception e){
+            System.exit(1);
+        }
     }
 
     /**
@@ -114,9 +148,6 @@ public class Lectura {
                 else if (i == 3){
                     u = Integer.parseInt(strings[2]);
                 }
-                else if (i ==4){
-                    breaks = Integer.parseInt(strings[2]);
-                }
                 else if (i == 5){
                     r = Double.parseDouble(strings[2]);
                 }
@@ -125,9 +156,6 @@ public class Lectura {
                 }
                 else if (i == 7){
                     Tmax = Double.parseDouble(strings[2]);
-                }
-                else if (i == 8){
-                    Smax = Double.parseDouble(strings[2]);
                 }
                 else if (i == 9){
                     stCustomer = Double.parseDouble(strings[2]);
@@ -148,7 +176,7 @@ public class Lectura {
      * @pàram
      * metodo que lee las coordenadas
      */
-    private void leerCoordenadas(BufferedReader input,ArrayList <Vertice> clientes, ArrayList <Vertice> cargas) {
+    private void leerCoordenadas(BufferedReader input,ArrayList <Vertice> clientes, ArrayList <Carga> cargas) {
         String entrada; // string para manejar la entrada
         String[] strings; // arreglo para manejar cada palabra
         try {
@@ -164,7 +192,7 @@ public class Lectura {
                         deposito = new Vertice(Double.parseDouble(strings[2]),Double.parseDouble(strings[3]),strings[1]);
                     }
                     else {
-                        Vertice n = new Vertice(Double.parseDouble(strings[2]),Double.parseDouble(strings[3]),strings[1]);
+                        Carga n = new Carga(Double.parseDouble(strings[2]),Double.parseDouble(strings[3]),strings[1],Integer.parseInt(strings[5]));
                         cargas.add(n);
                     }
                 }
@@ -183,7 +211,7 @@ public class Lectura {
      * metodo que crea el grafo con las cargas y los clientes
      */
 
-    private void insertarCoordenadas(ArrayList <Vertice> clientes, Graph grafo, ArrayList <Vertice> cargas) {
+    private void insertarCoordenadas(ArrayList <Vertice> clientes, Graph grafo, ArrayList <Carga> cargas) {
         for (Vertice s : clientes
                 ) {
             for (Vertice r : clientes
