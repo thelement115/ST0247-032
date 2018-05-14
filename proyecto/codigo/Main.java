@@ -22,7 +22,7 @@ public class Main {
         ArrayList <Vertice> solucion = new ArrayList<>();
         Lectura input = new Lectura();
         try {
-            g = input.leer("tc2c320s24cf4.txt", clientes, cargas);
+            g = input.leer("tc2c320s24cf0.txt", clientes, cargas);
             n = input.getN();
             m = input.getM();
             u = input.getU();
@@ -34,7 +34,7 @@ public class Main {
             deposito= input.getDeposito();
             //dibujar draw = new dibujar(clientes,cargas,deposito);
             Camino mejor = new Camino();
-            solucion =mejor.conjuntoSolucion(clientes,g,deposito,Tmax,speed,stCustomer,Q,r,cargas);
+            solucion =mejor.mejorSolucion(clientes,g,deposito,Tmax,speed,stCustomer,Q,r,cargas);
 //            for(int i =0; i<solucion.size(); ++i){
 //                System.out.println(solucion.get(i).nombre);
 //            }
