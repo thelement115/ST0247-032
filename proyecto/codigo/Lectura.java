@@ -67,29 +67,29 @@ public class Lectura {
      */
 
     public Graph leer (String archivo, ArrayList <Vertice> clientes, ArrayList <Carga> cargas) throws IOException{
-        input = new BufferedReader(new FileReader(archivo)); // creacion del buffered
-        String entrada; // string para manejar las entradas
-        Graph grafo = new Graph(); // se crea el grafo
+        input = new BufferedReader(new FileReader(archivo)); // creacion del buffered //c
+        String entrada; // string para manejar las entradas //c
+        Graph grafo = new Graph(); // se crea el grafo //c
         leerPrimeraParte(input); // lee todo antes de las coordenadas
         while (true){
-            entrada = input.readLine();
-            if (entrada.equals("Coordinates")){
-                leerCoordenadas(input,clientes,cargas); // lee las coordenadas
+            entrada = input.readLine(); //c
+            if (entrada.equals("Coordinates")){ //c
+                leerCoordenadas(input,clientes,cargas); // lee las coordenadas //l
                 break;
             }
         }
-        añadirEnergia(input,clientes,grafo,cargas);
-        insertarCoordenadas(clientes,grafo, cargas);
+        añadirEnergia(input,clientes,grafo,cargas); //x
+        insertarCoordenadas(clientes,grafo, cargas); // n^2+(n*x)
         return grafo;
     }
 
     private void añadirEnergia(BufferedReader input,ArrayList <Vertice> clientes,Graph g,ArrayList <Carga> cargas){
-        String entrada;
-        String[] strings;
-        ArrayList<Double> tempCarga = new ArrayList<>();
-        ArrayList<Double> cantidCarga= new ArrayList<>();
+        String entrada; //c
+        String[] strings; //c
+        ArrayList<Double> tempCarga = new ArrayList<>(); //c
+        ArrayList<Double> cantidCarga= new ArrayList<>(); //c
         try{
-            while (!(entrada=input.readLine()).equals("g")){
+            while (!(entrada=input.readLine()).equals("g")){  //g
                 if (entrada.equals("")|| entrada.equals("l")){
                     continue;
                 }
@@ -99,7 +99,7 @@ public class Lectura {
                     tempCarga.add(tiempo);
                 }
             }
-            while ((entrada = input.readLine())!= null){
+            while ((entrada = input.readLine())!= null){ //l
                 if (entrada.equals("") || entrada.equals("g")){ // si la linea esta vacia no se hace nada
                     continue;
                 }else {
@@ -108,16 +108,16 @@ public class Lectura {
                     cantidCarga.add(carga);
                 }
             }
-            for(Carga estacion : cargas){
-                if(estacion.tipo == 0){
-                    estacion.vel = (tempCarga.get(0));
-                    estacion.carga = cantidCarga.get(0);
-                }else if(estacion.tipo == 1){
-                    estacion.vel = tempCarga.get(1);
-                    estacion.carga = cantidCarga.get(1);
-                }else if(estacion.tipo == 2){
-                    estacion.vel= tempCarga.get(2);
-                    estacion.carga = cantidCarga.get(2);
+            for(Carga estacion : cargas){ //x
+                if(estacion.tipo == 0){ //c
+                    estacion.vel = (tempCarga.get(0)); //c
+                    estacion.carga = cantidCarga.get(0); //c
+                }else if(estacion.tipo == 1){ //c
+                    estacion.vel = tempCarga.get(1); //c
+                    estacion.carga = cantidCarga.get(1); //c
+                }else if(estacion.tipo == 2){ //c
+                    estacion.vel= tempCarga.get(2); //c
+                    estacion.carga = cantidCarga.get(2); //c
                 }
             }
 
@@ -133,10 +133,10 @@ public class Lectura {
      */
 
     private void leerPrimeraParte(BufferedReader input){
-        String entrada;
-        String [] strings;
-        try{
-            for (int i =1; i<= 10; ++i){
+        String entrada; //c
+        String [] strings; //c
+        try{ //c
+            for (int i =1; i<= 10; ++i){  //c
                 entrada = input.readLine();
                 strings = entrada.split(" ");
                 if (i == 1){
@@ -177,23 +177,23 @@ public class Lectura {
      * metodo que lee las coordenadas
      */
     private void leerCoordenadas(BufferedReader input,ArrayList <Vertice> clientes, ArrayList <Carga> cargas) {
-        String entrada; // string para manejar la entrada
-        String[] strings; // arreglo para manejar cada palabra
+        String entrada; // string para manejar la entrada //c
+        String[] strings; // arreglo para manejar cada palabra  //c
         try {
-            while (!(entrada = input.readLine()).equals("l")){ // se miran todas las coordenadas
-                if (entrada.equals("")){ // si la linea esta vacia no se hace nada
+            while (!(entrada = input.readLine()).equals("l")){ // se miran todas las coordenadas // l
+                if (entrada.equals("")){ // si la linea esta vacia no se hace nada //c
                     continue;
                 }else {
-                    strings = entrada.split(" "); //
-                    if (strings[1].charAt(0) == 'c' ){
-                        Vertice n = new Vertice(Double.parseDouble(strings[2]),Double.parseDouble(strings[3]),strings[1]);
-                        clientes.add(n);
-                    }else if(strings[1].charAt(0)== 'd'){
-                        deposito = new Vertice(Double.parseDouble(strings[2]),Double.parseDouble(strings[3]),strings[1]);
+                    strings = entrada.split(" "); // //c
+                    if (strings[1].charAt(0) == 'c' ){ //c
+                        Vertice n = new Vertice(Double.parseDouble(strings[2]),Double.parseDouble(strings[3]),strings[1]); //c
+                        clientes.add(n); //c
+                    }else if(strings[1].charAt(0)== 'd'){ //c
+                        deposito = new Vertice(Double.parseDouble(strings[2]),Double.parseDouble(strings[3]),strings[1]); //c
                     }
                     else {
-                        Carga n = new Carga(Double.parseDouble(strings[2]),Double.parseDouble(strings[3]),strings[1],Integer.parseInt(strings[5]));
-                        cargas.add(n);
+                        Carga n = new Carga(Double.parseDouble(strings[2]),Double.parseDouble(strings[3]),strings[1],Integer.parseInt(strings[5])); //c
+                        cargas.add(n); //c
                     }
                 }
             }
@@ -211,23 +211,23 @@ public class Lectura {
      * metodo que crea el grafo con las cargas y los clientes
      */
 
-    private void insertarCoordenadas(ArrayList <Vertice> clientes, Graph grafo, ArrayList <Carga> cargas) {
-        for (Vertice s : clientes
+    private void insertarCoordenadas(ArrayList <Vertice> clientes, Graph grafo, ArrayList <Carga> cargas) { // n^2+(n*x)
+        for (Vertice s : clientes //n
                 ) {
-            for (Vertice r : clientes
+            for (Vertice r : clientes //n
                     ) {
-                if(r != s) {
-                    grafo.addArc(s.nombre, r.nombre, s.x, s.y, r.x, r.y);
+                if(r != s) { //c
+                    grafo.addArc(s.nombre, r.nombre, s.x, s.y, r.x, r.y); //c
                 }
             }
-            for (Vertice r : cargas) {
-                grafo.addArc(s.nombre, r.nombre, s.x, s.y, r.x, r.y);
-                grafo.addArc(r.nombre, s.nombre, r.x, r.y, s.x, s.y);
-                grafo.addArc(s.nombre, deposito.nombre, s.x, s.y, deposito.x, deposito.y);
-                grafo.addArc(deposito.nombre, s.nombre, deposito.x, deposito.y, s.x, s.y);
+            for (Vertice r : cargas) { //x
+                grafo.addArc(s.nombre, r.nombre, s.x, s.y, r.x, r.y); //c
+                grafo.addArc(r.nombre, s.nombre, r.x, r.y, s.x, s.y); //c
+                grafo.addArc(s.nombre, deposito.nombre, s.x, s.y, deposito.x, deposito.y); //c
+                grafo.addArc(deposito.nombre, s.nombre, deposito.x, deposito.y, s.x, s.y); //c
             }
-            grafo.addArc(s.nombre, deposito.nombre, s.x, s.y, deposito.x, deposito.y);
-            grafo.addArc(deposito.nombre, s.nombre, deposito.x, deposito.y, s.x, s.y);
+            grafo.addArc(s.nombre, deposito.nombre, s.x, s.y, deposito.x, deposito.y); //c
+            grafo.addArc(deposito.nombre, s.nombre, deposito.x, deposito.y, s.x, s.y); //c
         }
     }
 
