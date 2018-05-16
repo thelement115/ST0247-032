@@ -62,7 +62,7 @@ public class Camino {
 
              time = time+g.getWeight(n.nombre,temp.nombre)/vel+cu; //c
 
-             if((time+(min/vel)+cu)>= Tmax ||(time+cu+(g.getWeight(temp.nombre,"depot")/vel))>= Tmax) { //c
+             if((time+(g.getWeight(temp.nombre,"depot")/vel))>= Tmax) { //c
                  total = total +time+ (g.getWeight(n.nombre,"depot")/vel); //c
                  so.add(in);
                  time = g.getWeight("depot",temp.nombre)/vel; //c
@@ -139,7 +139,7 @@ public class Camino {
 
             time = time+g.getWeight(n.nombre,temp.nombre)/vel+cu;
 
-            if((time+(min/vel)+cu)>= Tmax ||(time+cu+(g.getWeight(temp.nombre,"depot")/vel))>= Tmax) {
+            if(time+(g.getWeight(temp.nombre,"depot")/vel))>= Tmax) {
                 total = total +time+ (g.getWeight(n.nombre,"depot")/vel);
                 time = 0;
                 v.add(n);
