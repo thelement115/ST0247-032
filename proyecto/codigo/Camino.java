@@ -64,6 +64,7 @@ public class Camino {
 
              if((time+(min/vel)+cu)>= Tmax ||(time+cu+(g.getWeight(temp.nombre,"depot")/vel))>= Tmax) { //c
                  total = total +time+ (g.getWeight(n.nombre,"depot")/vel); //c
+                 so.add(in);
                  time = g.getWeight("depot",temp.nombre)/vel; //c
                  ca = cargaMax; //c
              }

@@ -35,9 +35,9 @@ public class Main {
                 //dibujar draw = new dibujar(clientes,cargas,deposito);
                 Camino mejor = new Camino();
                 solucion =mejor.mejorSolucion(clientes,g,deposito,Tmax,speed,stCustomer,Q,r,cargas);
-//            for(int i =0; i<solucion.size(); ++i){
-//                              System.out.println(solucion.get(i).nombre);
-//                         }
+            for(int i =0; i<solucion.size(); ++i){
+                              System.out.println(solucion.get(i).nombre);
+                         }
             } catch(IOException e){
                 System.out.println (e);
             }
