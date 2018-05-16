@@ -60,9 +60,7 @@ public class Camino {
                  }
              }
 
-             time = time+g.getWeight(n.nombre,temp.nombre)/vel+cu; //c
-
-             if((time+(g.getWeight(temp.nombre,"depot")/vel))>= Tmax) { //c
+             if(time+g.getWeight(n.nombre,temp.nombre)/vel+cu ||(time+(g.getWeight(temp.nombre,"depot")/vel))>= Tmax) { //c
                  total = total +time+ (g.getWeight(n.nombre,"depot")/vel); //c
                  so.add(in);
                  time = g.getWeight("depot",temp.nombre)/vel; //c
@@ -93,6 +91,7 @@ public class Camino {
                      ca = cargaMax;
                  }
              }
+             time = time+g.getWeight(n.nombre,temp.nombre)/vel+cu; //c
              ca-= min*ga; //c
              v.add(n); //c
              so.add(n); //c
@@ -137,9 +136,7 @@ public class Camino {
                 }
             }
 
-            time = time+g.getWeight(n.nombre,temp.nombre)/vel+cu;
-
-            if(time+(g.getWeight(temp.nombre,"depot")/vel))>= Tmax) {
+            if(time+g.getWeight(n.nombre,temp.nombre)/vel+cu || time+(g.getWeight(temp.nombre,"depot")/vel))>= Tmax) {
                 total = total +time+ (g.getWeight(n.nombre,"depot")/vel);
                 time = 0;
                 v.add(n);
@@ -174,6 +171,7 @@ public class Camino {
                     so.add(mejor);
                 }
             }
+            time = time+g.getWeight(n.nombre,temp.nombre)/vel+cu;
             ca-= min*ga;
             v.add(n);
             so.add(n);
