@@ -22,7 +22,7 @@ public class Main {
             ArrayList <Vertice> solucion = new ArrayList<>();
             Lectura input = new Lectura();
             try {
-                g = input.leer("tc2c320s24cf4.txt", clientes, cargas);
+                g = input.leer("tc2c320s24cf0.txt", clientes, cargas);
                 n = input.getN();
                 m = input.getM();
                 u = input.getU();
@@ -34,10 +34,33 @@ public class Main {
                 deposito= input.getDeposito();
                 //dibujar draw = new dibujar(clientes,cargas,deposito);
                 Camino mejor = new Camino();
-                solucion =mejor.mejorSolucion(clientes,g,deposito,Tmax,speed,stCustomer,Q,r,cargas);
+                double [] totales = new double[2];
+                ArrayList <Double> tiemposCarga = new ArrayList<>();
+                solucion =mejor.mejorSolucion(clientes,g,deposito,Tmax,speed,stCustomer,Q,r,cargas,totales,tiemposCarga);
+                int j =0;
+                int k =1;
             for(int i =0; i<solucion.size(); ++i){
-                              System.out.println(solucion.get(i).nombre);
-                         }
+                if(solucion.get(i).nombre.equals("depot")){
+                    System.out.println();
+                    System.out.println("ruta " + k);
+                    k++;
+                    continue;
+                }
+                System.out.print(solucion.get(i).nombre+ " ");
+                if(solucion.get(i).nombre.charAt(0) == 'c'){
+                    System.out.print(stCustomer+ " ");
+                }
+                else {
+                    System.out.print(tiemposCarga.get(j) +  " ");
+                    j++;
+                }
+            }
+            if(totales[0] < totales[1]){
+                System.out.println("tiempo total : " + totales[0]);
+            }else{
+                System.out.println("tiempo total : " + totales[1]);
+            }
+
             } catch(IOException e){
                 System.out.println (e);
             }
